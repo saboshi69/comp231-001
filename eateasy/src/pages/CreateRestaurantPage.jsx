@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { submitRestaurantData } from "../util/Http";
+import { useNavigate } from "react-router-dom";
 
 const CreateRestaurantPage = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     restaurantName: "",
     address: "",
@@ -23,6 +25,7 @@ const CreateRestaurantPage = () => {
     e.preventDefault();
     try {
       const responseData = await submitRestaurantData(formData);
+      navigate("/");
       console.log("Data submitted successfully:", responseData);
     } catch (error) {
       console.error("Error submitting data:", error);
