@@ -17,6 +17,7 @@ const AuthForm = ({ mode, username, email }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.user.currentUser);
+
   const userId = currentUser?._id;
 
   const mutationOptions = {
