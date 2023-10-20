@@ -92,7 +92,7 @@ export const signOut = async () => {
 
 export const submitRestaurantData = async (data) => {
   try {
-    const response = await fetch(`http://localhost:3000/api/restaurant/create-restaurant`, {
+    const response = await fetch(`/api/restaurant/create-restaurant`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -104,6 +104,67 @@ export const submitRestaurantData = async (data) => {
       throw new Error("Failed to send data");
     }
 
+    const responseData = await response.json();
+    return responseData;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const getAllRestaurants = async () => {
+  try {
+    const response = await fetch(`/api/restaurant/get-all-restaurants`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Failed to send data");
+    }
+
+    const responseData = await response.json();
+    console.log(responseData);
+    return responseData;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const searchRestaurant = async (searchQuery) => {
+  try {
+    const response = await fetch(`/api/restaurant/search-restaurant`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ searchQuery }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to send data");
+    }
+    const responseData = await response.json();
+    return responseData;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const getRestaurantById = async (id) => {
+  try {
+    const response = await fetch(`/api/restaurant/get-restaurant/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Failed to send data");
+    }
     const responseData = await response.json();
     return responseData;
   } catch (error) {

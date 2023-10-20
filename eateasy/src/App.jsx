@@ -8,6 +8,7 @@ import SignUp from "./pages/SignUpPage";
 import Profile from "./pages/ProfilePage";
 import AuthRoutes from "./components/AuthRoutes";
 import CreateRestaurant from "./pages/CreateRestaurantPage";
+import Restaurant from "./pages/RestaurantPage";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/restaurant/:id" element={<Restaurant />} />
           <Route element={<AuthRoutes />}>
             <Route path="/profile" element={<Profile />} />
             <Route path="/admin/create-restaurant" element={<CreateRestaurant />} />
