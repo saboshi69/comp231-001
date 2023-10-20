@@ -7,6 +7,7 @@ import SignIn from "./pages/SignInPage";
 import SignUp from "./pages/SignUpPage";
 import Profile from "./pages/ProfilePage";
 import AuthRoutes from "./components/AuthRoutes";
+import CreateRestaurant from "./pages/CreateRestaurantPage";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
           <Route path="/sign-up" element={<SignUp />} />
           <Route element={<AuthRoutes />}>
             <Route path="/profile" element={<Profile />} />
+            <Route path="/admin/create-restaurant" element={<CreateRestaurant />} />
           </Route>
         </Routes>
       </BrowserRouter>

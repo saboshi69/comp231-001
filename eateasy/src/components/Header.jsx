@@ -4,11 +4,12 @@ import { useSelector } from "react-redux";
 
 const Header = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
-  console.log(currentUser);
   return (
     <header className=" bg-slate-200 shadow-sm ">
       <div className="flex justify-between mx-auto w-5/6 items-center p-3">
-        <h1 className="font-bold text-sm sm:text-xl flex-wrap">EatEasy</h1>
+        <Link to="/">
+          <h1 className="font-bold text-sm sm:text-xl flex-wrap">EatEasy</h1>
+        </Link>
         <form className="bg-slate-100 p-2 rounded-lg flex justify-center items-center ">
           <input
             type="text"

@@ -1,11 +1,10 @@
 import { QueryClient } from "@tanstack/react-query";
 
 export const queryClient = new QueryClient();
-const apiBaseUrl = "http://localhost:3000";
 
 export const signUp = async (data) => {
   try {
-    const res = await fetch(`${apiBaseUrl}/api/auth/signup`, {
+    const res = await fetch(`/api/auth/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -27,7 +26,7 @@ export const signUp = async (data) => {
 
 export const signIn = async (data) => {
   try {
-    const res = await fetch(`${apiBaseUrl}/api/auth/signin`, {
+    const res = await fetch(`/api/auth/signin`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -51,7 +50,7 @@ export const signIn = async (data) => {
 
 export const updateUser = async (data, id) => {
   try {
-    const res = await fetch(`${apiBaseUrl}/api/user/update/${id}`, {
+    const res = await fetch(`/api/user/update/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -65,27 +64,6 @@ export const updateUser = async (data, id) => {
       throw new Error(errorData.message);
     }
     const responseData = await res.json();
-    console.log("🚀 ~ file: http.ts:44 ~ updateUser ~ responseData:", responseData);
-    return responseData;
-  } catch (err) {
-    console.error(err);
-    throw err;
-  }
-};
-
-export const deleteUser = async (id) => {
-  try {
-    const res = await fetch(`${apiBaseUrl}/api/user/delete/${id}`, {
-      method: "DELETE",
-    });
-
-    if (!res.ok) {
-      const errorData = await res.json();
-      console.log("🚀 ~ file: http.ts:96 ~ deleteUser ~ errorData", errorData);
-      throw new Error(errorData.message);
-    }
-    const responseData = await res.json();
-    console.log("🚀 ~ file: http.ts:116 ~ deleteUser ~ responseData:", responseData);
 
     return responseData;
   } catch (err) {
@@ -96,7 +74,7 @@ export const deleteUser = async (id) => {
 
 export const signOut = async () => {
   try {
-    const res = await fetch(`${apiBaseUrl}/api/auth/logout`, {
+    const res = await fetch(`/api/auth/logout`, {
       method: "GET",
     });
 
@@ -109,5 +87,27 @@ export const signOut = async () => {
   } catch (err) {
     console.error(err);
     throw err;
+  }
+};
+
+export const submitRestaurantData = async (data) => {
+  try {
+    const response = await fetch(`http://localhost:3000/api/restaurant/create-restaurant`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to send data");
+    }
+
+    const responseData = await response.json();
+    return responseData;
+  } catch (error) {
+    console.error(error);
+    throw error;
   }
 };
