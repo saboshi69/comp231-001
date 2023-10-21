@@ -1,4 +1,6 @@
 import Restaurant from "../models/restaurant.model.js";
+import Review from "../models/review.model.js";
+import mongoose from "mongoose";
 
 export const createRestaurant = async (req, res) => {
   const {
@@ -62,9 +64,24 @@ export const searchRestaurant = async (req, res) => {
 
 export const getRestaurantById = async (req, res) => {
   try {
-    const restaurant = await Restaurant.findById(req.params.id);
-    res.status(200).json(restaurant);
+    const { id } = req.params;
+    const objectId = new mongoose.Types.ObjectId(id);
+
+    const aggregateResult = await Review.aggregate([
+      { $match: { restaurant: objectId } },
+      {
+        $group: {
+          _id: "$restaurant",
+          averageRating: { $avg: "$rating" },
+        },
+      },
+    ]);
+
+    const avgRating = aggregateResult[0] ? aggregateResult[0].averageRating : null;
+    const restaurant = await Restaurant.findById(id);
+    res.status(200).json({ ...restaurant._doc, averageRating: avgRating });
   } catch (error) {
+    console.error("Error fetching restaurant by ID:", error);
     res.status(500).json({ message: error.message });
   }
 };

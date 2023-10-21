@@ -125,7 +125,6 @@ export const getAllRestaurants = async () => {
     }
 
     const responseData = await response.json();
-    console.log(responseData);
     return responseData;
   } catch (error) {
     console.error(error);
@@ -161,6 +160,85 @@ export const getRestaurantById = async (id) => {
       headers: {
         "Content-Type": "application/json",
       },
+    });
+    if (!response.ok) {
+      throw new Error("Failed to send data");
+    }
+    const responseData = await response.json();
+    console.log(responseData);
+    return responseData;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const submitReview = async (data) => {
+  try {
+    const response = await fetch(`/api/review/create-review`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to send data");
+    }
+    const responseData = await response.json();
+    return responseData;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const getAllReviews = async () => {
+  try {
+    const response = await fetch(`/api/review/get-all-reviews`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Failed to send data");
+    }
+    const responseData = await response.json();
+    return responseData;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const deleteReview = async (id) => {
+  try {
+    const response = await fetch(`/api/review/delete-review/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Failed to send data");
+    }
+    const responseData = await response.json();
+    return responseData;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const updateReview = async (data, id) => {
+  try {
+    const response = await fetch(`/api/review/update-review/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
     });
     if (!response.ok) {
       throw new Error("Failed to send data");
