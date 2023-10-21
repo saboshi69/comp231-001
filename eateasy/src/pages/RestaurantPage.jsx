@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { getRestaurantById } from "../util/Http";
 import { useParams } from "react-router-dom";
 
+import ReviewList from "../components/ReviewList";
+
 const RestaurantPage = () => {
   const [restaurant, setRestaurant] = useState();
   const id = useParams().id;
@@ -13,7 +15,6 @@ const RestaurantPage = () => {
     };
     fetchRestaurant();
   }, [id]);
-  console.log(restaurant);
 
   return (
     restaurant && (
@@ -42,7 +43,7 @@ const RestaurantPage = () => {
           <strong>Description:</strong> {restaurant.description}
         </p>
         <p className="mb-2">
-          <strong>Ratings:</strong> {restaurant.ratings}
+          <strong>Ratings:</strong> {Math.round(restaurant.averageRating * 10) / 10}
         </p>
 
         <div className="mb-4">
@@ -53,6 +54,8 @@ const RestaurantPage = () => {
             ))}
           </ul>
         </div>
+        <h1 className="my-8">Review</h1>
+        <ReviewList />
       </div>
     )
   );

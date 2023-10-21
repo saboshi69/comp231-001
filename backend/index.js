@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import userRouter from "./routes/user.route.js";
 import restaurantRouter from "./routes/restaurant.route.js";
 import authRouter from "./routes/auth.route.js";
+import reviewRouter from "./routes/review.route.js";
 
 dotenv.config();
 
@@ -41,3 +42,4 @@ app.use((req, res, next) => {
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/restaurant", restaurantRouter);
+app.use("/api/review", reviewRouter);
