@@ -6,12 +6,15 @@ import ReviewList from "../components/ReviewList";
 
 const RestaurantPage = () => {
   const [restaurant, setRestaurant] = useState();
+  const [restaurantId, setRestaurantId] = useState();
+
   const id = useParams().id;
 
   useEffect(() => {
     const fetchRestaurant = async () => {
-      const data = await getRestaurantById(id);
-      setRestaurant(data);
+      const restaurantData = await getRestaurantById(id);
+      setRestaurant(restaurantData);
+      setRestaurantId(restaurantData._id);
     };
     fetchRestaurant();
   }, [id]);
@@ -55,7 +58,7 @@ const RestaurantPage = () => {
           </ul>
         </div>
         <h1 className="my-8">Review</h1>
-        <ReviewList />
+        <ReviewList restaurantId={restaurantId} />
       </div>
     )
   );

@@ -165,7 +165,7 @@ export const getRestaurantById = async (id) => {
       throw new Error("Failed to send data");
     }
     const responseData = await response.json();
-    console.log(responseData);
+
     return responseData;
   } catch (error) {
     console.error(error);
@@ -239,6 +239,25 @@ export const updateReview = async (data, id) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to send data");
+    }
+    const responseData = await response.json();
+    return responseData;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const getReview = async (id) => {
+  try {
+    const response = await fetch(`/api/review/get-reviews/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
     if (!response.ok) {
       throw new Error("Failed to send data");

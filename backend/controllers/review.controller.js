@@ -51,3 +51,18 @@ export const updateReview = async (req, res) => {
 
   res.json(updatedReview);
 };
+
+export const getReviewsForRestaurant = async (req, res) => {
+  const restaurantId = req.params.id;
+
+  try {
+    const reviews = await Review.find({ restaurant: restaurantId })
+      .populate("user", "username")
+      .exec();
+
+    res.status(200).json(reviews);
+    console.log(reviews);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
