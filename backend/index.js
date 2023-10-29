@@ -7,6 +7,7 @@ import userRouter from "./routes/user.route.js";
 import restaurantRouter from "./routes/restaurant.route.js";
 import authRouter from "./routes/auth.route.js";
 import reviewRouter from "./routes/review.route.js";
+import path from "path";
 
 dotenv.config();
 
@@ -37,6 +38,11 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE, OPTIONS, PUT");
 
   next();
+});
+
+app.use(express.static(path.join(path.resolve(), "../eateasy/dist")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(path.resolve(), "../eateasy/dist", "index.html"));
 });
 
 app.use("/api/auth", authRouter);
