@@ -10,7 +10,7 @@ const ReviewList = () => {
   const [desc, setDesc] = useState("");
   const [rating, setRating] = useState("");
   const [reviewId, setReviewId] = useState(null);
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["review"],
     queryFn: getAllReviews,
   });
@@ -22,6 +22,7 @@ const ReviewList = () => {
 
   return (
     <>
+      {isLoading && <p>Loading...</p>}
       <div className="w-full max-w-xl my-8 bg-white shadow-md rounded-lg p-4 text-center">
         {data &&
           data.map((review) => (
@@ -59,18 +60,21 @@ const ReviewList = () => {
             </div>
           ))}
       </div>
+      {currentUser && (
+        <>
+          {mode !== "create" && (
+            <button
+              onClick={() => setMode("create")}
+              className="text-green-500  hover:text-green-700 border-2 rounded-sm p-2 mb-4 hover:bg-teal-100"
+            >
+              Create a Review
+            </button>
+          )}
 
-      {mode !== "create" && (
-        <button
-          onClick={() => setMode("create")}
-          className="text-green-500ed-500 hover:text-green-600 border-2 rounded-sm p-2 mb-4 hover:bg-teal-100"
-        >
-          Create a Review
-        </button>
-      )}
-
-      {mode !== "" && (
-        <ReviewForm mode={mode} reviewId={reviewId} desc={desc} rating={Number(rating)} />
+          {mode !== "" && (
+            <ReviewForm mode={mode} reviewId={reviewId} desc={desc} rating={Number(rating)} />
+          )}
+        </>
       )}
     </>
   );

@@ -7,6 +7,7 @@ import userRouter from "./routes/user.route.js";
 import restaurantRouter from "./routes/restaurant.route.js";
 import authRouter from "./routes/auth.route.js";
 import reviewRouter from "./routes/review.route.js";
+import path from "path";
 
 dotenv.config();
 
@@ -43,3 +44,8 @@ app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/restaurant", restaurantRouter);
 app.use("/api/review", reviewRouter);
+
+app.use(express.static(path.join(path.resolve(), "../eateasy/dist")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(path.resolve(), "../eateasy/dist", "index.html"));
+});
