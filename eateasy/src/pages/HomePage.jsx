@@ -39,7 +39,6 @@ const HomePage = () => {
             <Card
               key={restaurant._id}
               _id={restaurant._id}
-              ratings={restaurant.ratings}
               title={restaurant.restaurantName}
               image={restaurant.images[0]}
               address={restaurant.address}
