@@ -60,18 +60,21 @@ const ReviewList = () => {
             </div>
           ))}
       </div>
+      {currentUser && (
+        <>
+          {mode !== "create" && (
+            <button
+              onClick={() => setMode("create")}
+              className="text-green-500  hover:text-green-700 border-2 rounded-sm p-2 mb-4 hover:bg-teal-100"
+            >
+              Create a Review
+            </button>
+          )}
 
-      {mode !== "create" && (
-        <button
-          onClick={() => setMode("create")}
-          className="text-green-500ed-500 hover:text-green-600 border-2 rounded-sm p-2 mb-4 hover:bg-teal-100"
-        >
-          Create a Review
-        </button>
-      )}
-
-      {mode !== "" && (
-        <ReviewForm mode={mode} reviewId={reviewId} desc={desc} rating={Number(rating)} />
+          {mode !== "" && (
+            <ReviewForm mode={mode} reviewId={reviewId} desc={desc} rating={Number(rating)} />
+          )}
+        </>
       )}
     </>
   );
