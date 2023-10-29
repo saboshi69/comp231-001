@@ -10,7 +10,7 @@ const ReviewList = () => {
   const [desc, setDesc] = useState("");
   const [rating, setRating] = useState("");
   const [reviewId, setReviewId] = useState(null);
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["review"],
     queryFn: getAllReviews,
   });
@@ -22,6 +22,7 @@ const ReviewList = () => {
 
   return (
     <>
+      {isLoading && <p>Loading...</p>}
       <div className="w-full max-w-xl my-8 bg-white shadow-md rounded-lg p-4 text-center">
         {data &&
           data.map((review) => (

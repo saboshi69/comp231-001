@@ -40,12 +40,12 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(express.static(path.join(path.resolve(), "../eateasy/dist")));
-app.get("*", (req, res) => {
-  res.sendFile(path.join(path.resolve(), "../eateasy/dist", "index.html"));
-});
-
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/restaurant", restaurantRouter);
 app.use("/api/review", reviewRouter);
+
+app.use(express.static(path.join(path.resolve(), "../eateasy/dist")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(path.resolve(), "../eateasy/dist", "index.html"));
+});
