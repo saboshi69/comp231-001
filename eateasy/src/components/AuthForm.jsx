@@ -62,7 +62,7 @@ const AuthForm = ({ mode, username, email }) => {
               update: "Update Profile",
             }[mode]
           }</h1>
-          <p className="py-6">Welcome! Sign in to access your personalized dashboard, manage your orders, and explore our delightful offerings. We're committed to making your experience seamless and enjoyable.</p>
+          <p className="py-6">Welcome! Sign in to access your personalized dashboard, manage your orders, and explore our delightful offerings. We&apos;re committed to making your experience seamless and enjoyable.</p>
           {(mode === "signUp" || mode === "signIn") && (
             <div className="mt-5">
               <p className="">{mode === "signUp" ? "Have an account?" : "Don't have an account?"}</p>
