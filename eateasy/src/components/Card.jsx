@@ -19,26 +19,26 @@ const Card = (props) => {
     <div className="card card-normal w-72 glass overflow-hidden">
       <Link to={`/restaurant/${props._id}`} className="">
         <figure className="relative block w-full pb-[60%]"><img className="absolute w-full h-full top-0 left-0 object-cover" src={props.image} alt="" /></figure>
-      </Link>
-      <div className="card-body">
-        <h3 className="card-title">{props.title}</h3>
-        <div>
-          <div className="rating">
-            {[1, 2, 3, 4, 5].map((index) => (
-              <input
-                key={index}
-                type="radio"
-                name={`rating-${roundedRating}`}
-                className="mask mask-star-2 bg-orange-400"
-                checked={index <= roundedRating}
-                readOnly // This makes the rating read-only
-              />
-            ))}
+        <div className="card-body">
+          <h3 className="card-title">{props.title}</h3>
+          <div>
+            <div className="rating">
+              {[1, 2, 3, 4, 5].map((index) => (
+                <input
+                  key={index}
+                  type="radio"
+                  name={`rating-${roundedRating}`}
+                  className="mask mask-star-2 bg-orange-400"
+                  checked={index <= roundedRating}
+                  readOnly // This makes the rating read-only
+                />
+              ))}
+            </div>
+            <p className=""><span className="font-bold">Address:</span> {props.address}</p>
+            <p className="line-clamp-3"><span className="font-bold">Detail:</span>{props.description}</p>
           </div>
-          <p className=""><span className="font-bold">Address:</span> {props.address}</p>
-          <p className="line-clamp-3"><span className="font-bold">Detail:</span>{props.description}</p>
         </div>
-      </div>
+      </Link>
     </div >
   );
 };
