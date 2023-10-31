@@ -9,24 +9,37 @@ const Card = (props) => {
     queryFn: () => getRestaurantById(props._id),
   });
 
+  const roundedRating = data ? (data.averageRating !== null ? parseFloat(data.averageRating).toFixed(1) : 0) : 0;
+
   if (isLoading) {
     return <p>Loading...</p>;
   }
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-4 text-center w-[500px]">
-      <h1 className="text-xl">{props.title}</h1>
+    <div className="card card-normal w-72 glass overflow-hidden">
       <Link to={`/restaurant/${props._id}`} className="">
-        <img src={props.image} alt="" className="my-4 " />
+        <figure className="relative block w-full pb-[60%]"><img className="absolute w-full h-full top-0 left-0 object-cover" src={props.image} alt="" /></figure>
       </Link>
-
-      <p className="">
-        Rating:{" "}
-        {data ? (data.averageRating !== null ? parseFloat(data.averageRating).toFixed(1) : 0) : 0}
-      </p>
-      <p className="">Address: {props.address}</p>
-      <p className="">{props.description}</p>
-    </div>
+      <div className="card-body">
+        <h3 className="card-title">{props.title}</h3>
+        <div>
+          <div className="rating">
+            {[1, 2, 3, 4, 5].map((index) => (
+              <input
+                key={index}
+                type="radio"
+                name={`rating-${roundedRating}`}
+                className="mask mask-star-2 bg-orange-400"
+                checked={index <= roundedRating}
+                readOnly // This makes the rating read-only
+              />
+            ))}
+          </div>
+          <p className=""><span className="font-bold">Address:</span> {props.address}</p>
+          <p className="line-clamp-3"><span className="font-bold">Detail:</span>{props.description}</p>
+        </div>
+      </div>
+    </div >
   );
 };
 
