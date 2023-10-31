@@ -22,7 +22,7 @@ const HomePage = () => {
   };
 
   return (
-    <div className="w-5/6 mx-auto gap-4 flex flex-col">
+    <div className="mt-6 w-5/6 mx-auto gap-4 flex flex-col">
       <form className="bg-slate-100 p-2 rounded-lg flex justify-center items-center ">
         <input
           type="text"
