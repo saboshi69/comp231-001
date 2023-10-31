@@ -9,6 +9,7 @@ import Profile from "./pages/ProfilePage";
 import AuthRoutes from "./components/AuthRoutes";
 import CreateRestaurant from "./pages/CreateRestaurantPage";
 import Restaurant from "./pages/RestaurantPage";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
             <Route path="/admin/create-restaurant" element={<CreateRestaurant />} />
           </Route>
         </Routes>
+        <Footer />
       </BrowserRouter>
     </QueryClientProvider>
   );
