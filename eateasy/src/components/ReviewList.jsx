@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import ReviewForm from "./ReviewForm";
 import { useState } from "react";
 import PropTypes from "prop-types";
+import StarRating from "./StarRating";
 
 const ReviewList = ({ restaurantId }) => {
   ReviewList.propTypes = {
@@ -37,13 +38,14 @@ const ReviewList = ({ restaurantId }) => {
             key={review._id}
             className="w-full max-w-xl my-8 bg-white shadow-md rounded-lg p-4 text-center"
           >
-            <div className="p-4 border-b border-gray-200">
+            <div className="p-4">
               <div className="flex justify-between">
                 <p className="font-semibold">{review.user?.username}</p>
                 <p className="text-gray-500">{review.createdAt}</p>
-                <p className="text-gray-500">Rating: {review.rating} / 5</p>
+                <StarRating rating={review.rating} />
               </div>
-              <p className="text-lg font-medium mt-4  break-words">{review.text}</p>
+              <hr className="mt-4" />
+              <p className="text-lg font-medium mt-4 break-words text-left">{review.text}</p>
 
               {currentUser?._id === review.user?._id && (
                 <div className="flex justify-end">

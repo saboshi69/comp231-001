@@ -10,7 +10,7 @@ const Card = (props) => {
     queryFn: () => getRestaurantById(props._id),
   });
 
-  const roundedRating = data ? (data.averageRating !== null ? parseFloat(data.averageRating).toFixed(1) : 0) : 0;
+  const roundedRating = data ? (data.averageRating !== null ? Math.round(Number.parseFloat(data.averageRating) * 10) / 10 : 0) : 0;
 
   if (isLoading) {
     return <p>Loading...</p>;
