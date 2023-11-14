@@ -36,7 +36,7 @@ const ReviewList = ({ restaurantId }) => {
         reviewsArray.map((review) => (
           <div
             key={review._id}
-            className="w-full max-w-xl my-8 bg-white shadow-md rounded-lg p-4 text-center"
+            className="w-full max-w-xl my-3 bg-white shadow-md rounded-lg p-4 text-center"
           >
             <div className="p-4">
               <div className="flex justify-between">
@@ -79,7 +79,7 @@ const ReviewList = ({ restaurantId }) => {
           {mode !== "create" && (
             <button
               onClick={() => setMode("create")}
-              className="text-green-500  hover:text-green-700 border-2 rounded-sm p-2 mb-4 hover:bg-teal-100"
+              className="btn btn-secondary"
             >
               Create a Review
             </button>
