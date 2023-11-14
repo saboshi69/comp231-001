@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getRestaurantById } from "../util/Http";
+import StarRating from "./StarRating";
 
 const Card = (props) => {
   const { data, isLoading } = useQuery({
@@ -22,18 +23,7 @@ const Card = (props) => {
         <div className="card-body">
           <h3 className="card-title">{props.title}</h3>
           <div>
-            <div className="rating">
-              {[1, 2, 3, 4, 5].map((index) => (
-                <input
-                  key={index}
-                  type="radio"
-                  name={`rating-${roundedRating}`}
-                  className="mask mask-star-2 bg-orange-400"
-                  checked={index <= roundedRating}
-                  readOnly // This makes the rating read-only
-                />
-              ))}
-            </div>
+            <StarRating rating={roundedRating} />
             <p className=""><span className="font-bold">Address:</span> {props.address}</p>
             <p className="line-clamp-3"><span className="font-bold">Detail:</span>{props.description}</p>
           </div>
