@@ -2,6 +2,7 @@ import { FaSearch } from "react-icons/fa";
 import Card from "../components/Card";
 import { useEffect, useState } from "react";
 import { getAllRestaurants, searchRestaurant } from "../util/Http";
+import HeroImage from "../assets/image/hero.jpg";
 
 const HomePage = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -22,8 +23,18 @@ const HomePage = () => {
   };
 
   return (
-    <div className="w-5/6 mx-auto gap-4 flex flex-col">
-      <form className="bg-slate-100 p-2 rounded-lg flex justify-center items-center ">
+    <div className="mt-6 w-5/6 mx-auto gap-4 flex flex-col">
+      <div className="hero max-w-[1024px] mx-auto min-h-[420px] rounded-md" style={{ backgroundImage: `url(${HeroImage})`, }}>
+        <div className="hero-overlay bg-opacity-60"></div>
+        <div className="hero-content text-center text-neutral-content">
+          <div className="max-w-md">
+            <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
+            <p className="mb-5">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+            <button className="btn btn-primary">Get Started</button>
+          </div>
+        </div>
+      </div>
+      <form className="bg-slate-100  max-w-[1024px] mx-auto w-full mt-5 p-2 rounded-lg flex justify-center items-center ">
         <input
           type="text"
           className="bg-transparent outline-none w-24 sm:w-64"
