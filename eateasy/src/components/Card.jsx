@@ -10,7 +10,11 @@ const Card = (props) => {
     queryFn: () => getRestaurantById(props._id),
   });
 
-  const roundedRating = data ? (data.averageRating !== null ? Math.round(Number.parseFloat(data.averageRating) * 10) / 10 : 0) : 0;
+  const roundedRating = data
+    ? data.averageRating !== null
+      ? Math.round(Number.parseFloat(data.averageRating) * 10) / 10
+      : 0
+    : 0;
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -19,17 +23,28 @@ const Card = (props) => {
   return (
     <div className="card card-normal w-72 glass overflow-hidden">
       <Link to={`/restaurant/${props._id}`} className="">
-        <figure className="relative block w-full pb-[60%]"><img className="absolute w-full h-full top-0 left-0 object-cover" src={props.image} alt="" /></figure>
+        <figure className="relative block w-full pb-[60%]">
+          <img
+            className="absolute w-full h-full top-0 left-0 object-cover"
+            src={props.image}
+            alt=""
+          />
+        </figure>
         <div className="card-body">
           <h3 className="card-title">{props.title}</h3>
           <div>
             <StarRating rating={roundedRating} />
-            <p className=""><span className="font-bold">Address:</span> {props.address}</p>
-            <p className="line-clamp-3"><span className="font-bold">Detail:</span>{props.description}</p>
+            <p className="">
+              <span className="font-bold">Address:</span> {props.address}
+            </p>
+            <p className="line-clamp-3">
+              <span className="font-bold">Detail:</span>
+              {props.description}
+            </p>
           </div>
         </div>
       </Link>
-    </div >
+    </div>
   );
 };
 
