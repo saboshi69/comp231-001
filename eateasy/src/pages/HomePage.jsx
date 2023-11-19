@@ -2,8 +2,11 @@ import { FaSearch } from "react-icons/fa";
 import Card from "../components/Card";
 import { useEffect, useState } from "react";
 import { getAllRestaurants, searchRestaurant } from "../util/Http";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [restaurants, setRestaurants] = useState([]);
 
@@ -17,7 +20,10 @@ const HomePage = () => {
 
   const handleSearch = async (e) => {
     e.preventDefault();
+    const urlParams = new URLSearchParams(window.location.search);
     const data = await searchRestaurant(searchTerm);
+    urlParams.set("searchTerm", searchTerm.toString() || "");
+    navigate("?" + urlParams.toString());
     setRestaurants(data);
   };
 
@@ -33,6 +39,9 @@ const HomePage = () => {
         />
         <FaSearch className="text-slate-600 cursor-pointer" onClick={handleSearch} />
       </form>
+      <button>
+        <Link to="/search">Advacned Search</Link>
+      </button>
       <div className="my-8 mx-auto gap-4 flex flex-wrap justify-between ">
         {restaurants &&
           restaurants.map((restaurant) => (
