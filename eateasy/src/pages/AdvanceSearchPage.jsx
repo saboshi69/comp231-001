@@ -44,7 +44,7 @@ const AdvanceSearchPage = () => {
           />
         </div>
         <div className="flex items-center gap-4">
-          <label htmlFor="search">Rate: </label>
+          <label htmlFor="search">Average Review Rate: </label>
           <input
             type="number"
             className="w-full rounded-md border-2 p-1"

@@ -77,10 +77,7 @@ const ReviewList = ({ restaurantId }) => {
       {currentUser && (
         <>
           {mode !== "create" && (
-            <button
-              onClick={() => setMode("create")}
-              className="btn btn-secondary"
-            >
+            <button onClick={() => setMode("create")} className="btn btn-secondary">
               Create a Review
             </button>
           )}
