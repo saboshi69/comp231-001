@@ -49,11 +49,7 @@ export const searchRestaurant = async (req, res) => {
   const searchQuery = req.body.searchQuery;
   try {
     const restaurants = await Restaurant.find({
-      $or: [
-        { restaurantName: { $regex: searchQuery, $options: "i" } },
-        { address: { $regex: searchQuery, $options: "i" } },
-        { description: { $regex: searchQuery, $options: "i" } },
-      ],
+      $or: [{ restaurantName: { $regex: searchQuery, $options: "i" } }],
     });
 
     res.status(200).json(restaurants);
@@ -82,6 +78,59 @@ export const getRestaurantById = async (req, res) => {
     res.status(200).json({ ...restaurant._doc, averageRating: avgRating });
   } catch (error) {
     console.error("Error fetching restaurant by ID:", error);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const getSearchedRestaurants = async (req, res) => {
+  const { searchTerm, rate, review } = req.query;
+
+  const pipeline = [];
+
+  if (searchTerm) {
+    pipeline.push({ $match: { restaurantName: { $regex: searchTerm, $options: "i" } } });
+  }
+
+  pipeline.push({
+    $lookup: {
+      from: "reviews",
+      localField: "_id",
+      foreignField: "restaurant",
+      as: "reviews",
+    },
+  });
+
+  pipeline.push({
+    $addFields: {
+      averageRating: { $avg: "$reviews.rating" },
+    },
+  });
+
+  if (rate) {
+    pipeline.push({ $match: { averageRating: { $gte: Number(rate) } } });
+  }
+
+  if (review) {
+    pipeline.push({ $match: { "reviews.text": { $regex: review, $options: "i" } } });
+  }
+
+  pipeline.push({
+    $group: {
+      _id: "$_id",
+      restaurantName: { $first: "$restaurantName" },
+      images: { $first: "$images" },
+      address: { $first: "$address" },
+      description: { $first: "$description" },
+      reviews: { $push: "$reviews" },
+      averageRating: { $first: "$averageRating" },
+    },
+  });
+
+  try {
+    const restaurants = await Restaurant.aggregate(pipeline);
+    res.status(200).json(restaurants);
+  } catch (error) {
+    console.error("Error fetching searched restaurants:", error);
     res.status(500).json({ message: error.message });
   }
 };

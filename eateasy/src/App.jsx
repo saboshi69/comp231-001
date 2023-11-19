@@ -10,6 +10,7 @@ import AuthRoutes from "./components/AuthRoutes";
 import CreateRestaurant from "./pages/CreateRestaurantPage";
 import Restaurant from "./pages/RestaurantPage";
 import Footer from "./components/Footer";
+import AdvanceSearchPage from "./pages/AdvanceSearchPage";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/restaurant/:id" element={<Restaurant />} />
+          <Route path="/search" element={<AdvanceSearchPage />} />
           <Route element={<AuthRoutes />}>
             <Route path="/profile" element={<Profile />} />
             <Route path="/admin/create-restaurant" element={<CreateRestaurant />} />
