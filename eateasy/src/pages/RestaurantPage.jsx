@@ -17,6 +17,7 @@ const RestaurantPage = () => {
       setRestaurant(restaurantData);
       setRestaurantId(restaurantData._id);
     };
+
     fetchRestaurant();
   }, [id]);
 
@@ -47,7 +48,7 @@ const RestaurantPage = () => {
 
         <div className="flex items-center">
           <h1 className="text-xl font-bold my-4 mx-2">{restaurant.restaurantName}</h1>
-          <StarRating rating={Math.round(restaurant.averageRating * 10) / 10} />
+          <StarRating rating={Math.round(restaurant.averageRating)} />
         </div>
         <div className="flex flex-col w-full max-w-xl">
           <p className="mb-2">
