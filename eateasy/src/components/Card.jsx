@@ -12,7 +12,7 @@ const Card = (props) => {
 
   const roundedRating = data
     ? data.averageRating !== null
-      ? Math.round(Number.parseFloat(data.averageRating) * 10) / 10
+      ? Math.round(Number.parseFloat(data.averageRating))
       : 0
     : 0;
 
