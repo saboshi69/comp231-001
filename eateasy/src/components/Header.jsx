@@ -14,6 +14,9 @@ const Header = () => {
           <Link to="/">
             <li className="hidden md:inline hover:underline cursor-pointer">Home</li>
           </Link>
+          <Link to="/offer">
+            <li className="md:inline hover:underline cursor-pointer">Offer</li>
+          </Link>
           {currentUser ? (
             <Link to="profile">{currentUser.username ? currentUser.username : ""}</Link>
           ) : (
