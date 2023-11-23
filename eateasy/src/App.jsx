@@ -11,6 +11,7 @@ import CreateRestaurant from "./pages/CreateRestaurantPage";
 import Restaurant from "./pages/RestaurantPage";
 import Footer from "./components/Footer";
 import AdvanceSearchPage from "./pages/AdvanceSearchPage";
+import OfferPage from "./pages/OfferPage";
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
           <Route element={<AuthRoutes />}>
             <Route path="/profile" element={<Profile />} />
             <Route path="/admin/create-restaurant" element={<CreateRestaurant />} />
+            <Route path="/offer" element={<OfferPage />} />
           </Route>
         </Routes>
         <Footer />
