@@ -28,7 +28,7 @@ const AdvanceSearchPage = () => {
   });
 
   return (
-    <div className="flex flex-col gap-8 md:flex-row ">
+    <div className="flex flex-col gap-8 md:flex-row">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap-8 border-b-2 p-8 sm:border-r-2 md:min-h-screen xl:min-w-[350px]"
