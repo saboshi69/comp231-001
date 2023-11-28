@@ -52,10 +52,9 @@ const HomePage = () => {
           <div className="max-w-md">
             <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
             <p className="mb-5">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi
-              exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.
+              Discover your next favorite dining spot with us! Explore a world of flavors, find local gems, and experience the joy of gastronomy. Whether you're craving something exotic or a classic comfort dish, your culinary adventure starts here.
             </p>
-            <button className="btn btn-primary">Get Started</button>
+            <a className="btn btn-primary" href="#searchRest">Get Started</a>
           </div>
         </div>
       </div>
@@ -72,7 +71,7 @@ const HomePage = () => {
           />
         ))}
       </div>
-      <h3 className="text-3xl">Searching Restaurants</h3>
+      <h3 className="text-3xl" id="searchRest">Searching Restaurants</h3>
       <form className="bg-slate-100  max-w-[1024px] mx-auto w-full mt-5 p-2 rounded-lg flex justify-center items-center ">
         <input
           type="text"
