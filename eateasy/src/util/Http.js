@@ -272,12 +272,15 @@ export const getReview = async (id) => {
 
 export const getSearch = async (search) => {
   try {
-    const res = await fetch(`/api/restaurant/get?${search}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const res = await fetch(
+      `/api/restaurant/get-searched-restaurants?${search}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     if (!res.ok) {
       const errorData = await res.json();
