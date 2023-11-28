@@ -10,14 +10,27 @@ const HomePage = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [restaurants, setRestaurants] = useState([]);
+  const [recommendedRestaurants, setrecommendedRestaurants] = useState([]);
+
 
   useEffect(() => {
     const fetchRestaurants = async () => {
       const data = await getAllRestaurants();
       setRestaurants(data);
+      // Sort the restaurants based on average ratings and pick the top 5
+      const sortedByRatings = [...data].sort((a, b) => b.ratings - a.ratings).slice(0, 5);
+      setrecommendedRestaurants(shuffleArray(sortedByRatings.slice(0, 3)));
     };
     fetchRestaurants();
   }, []);
+
+  const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  };
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -29,7 +42,7 @@ const HomePage = () => {
   };
 
   return (
-    <div className="mt-6 w-5/6 mx-auto gap-4 flex flex-col">
+    <div className="max-w-[1024px] mt-6 w-5/6 mx-auto gap-4 flex flex-col">
       <div
         className="hero max-w-[1024px] mx-auto min-h-[420px] rounded-md"
         style={{ backgroundImage: `url(${HeroImage})` }}
@@ -46,20 +59,34 @@ const HomePage = () => {
           </div>
         </div>
       </div>
+      <h3 className="text-3xl">Our Top Recommendations</h3>
+      <div className="recommended-restaurants my-8 mx-auto gap-4 flex flex-wrap justify-center">
+        {recommendedRestaurants.map((restaurant) => (
+          <Card
+            key={restaurant._id}
+            _id={restaurant._id}
+            title={restaurant.restaurantName}
+            image={restaurant.images[0]}
+            address={restaurant.address}
+            description={restaurant.description}
+          />
+        ))}
+      </div>
+      <h3 className="text-3xl">Searching Restaurants</h3>
       <form className="bg-slate-100  max-w-[1024px] mx-auto w-full mt-5 p-2 rounded-lg flex justify-center items-center ">
         <input
           type="text"
           className="bg-transparent outline-none w-24 sm:w-64"
-          placeholder="Search..."
+          placeholder="Search Something Here"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
         <FaSearch className="text-slate-600 cursor-pointer" onClick={handleSearch} />
       </form>
-      <button>
-        <Link to="/search">Advacned Search</Link>
+      <button className="text-xs underline">
+        <Link to="/search">Click and Try Our Advanced Search!</Link>
       </button>
-      <div className="my-8 mx-auto gap-4 flex flex-wrap justify-between ">
+      <div className="my-8 mx-auto gap-4 flex flex-wrap justify-center ">
         {restaurants &&
           restaurants.map((restaurant) => (
             <Card
