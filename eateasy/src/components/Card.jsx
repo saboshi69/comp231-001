@@ -34,7 +34,7 @@ const Card = (props) => {
           <h3 className="card-title">{props.title}</h3>
           <div>
             <StarRating rating={roundedRating} />
-            <p className="">
+            <p className="mt-3">
               <span className="font-bold">Address:</span> {props.address}
             </p>
             <p className="line-clamp-3">
