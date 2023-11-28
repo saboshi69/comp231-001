@@ -73,7 +73,9 @@ export const getRestaurantById = async (req, res) => {
       },
     ]);
 
-    const avgRating = aggregateResult[0] ? aggregateResult[0].averageRating : null;
+    const avgRating = aggregateResult[0]
+      ? aggregateResult[0].averageRating
+      : null;
     const restaurant = await Restaurant.findById(id);
     res.status(200).json({ ...restaurant._doc, averageRating: avgRating });
   } catch (error) {
@@ -88,7 +90,9 @@ export const getSearchedRestaurants = async (req, res) => {
   const pipeline = [];
 
   if (searchTerm) {
-    pipeline.push({ $match: { restaurantName: { $regex: searchTerm, $options: "i" } } });
+    pipeline.push({
+      $match: { restaurantName: { $regex: searchTerm, $options: "i" } },
+    });
   }
 
   pipeline.push({
@@ -111,7 +115,9 @@ export const getSearchedRestaurants = async (req, res) => {
   }
 
   if (review) {
-    pipeline.push({ $match: { "reviews.text": { $regex: review, $options: "i" } } });
+    pipeline.push({
+      $match: { "reviews.text": { $regex: review, $options: "i" } },
+    });
   }
 
   pipeline.push({
@@ -131,6 +137,22 @@ export const getSearchedRestaurants = async (req, res) => {
     res.status(200).json(restaurants);
   } catch (error) {
     console.error("Error fetching searched restaurants:", error);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const editRestaurantInfo = async (req, res) => {
+  const { id } = req.params;
+  const updateData = req.body;
+
+  try {
+    const updatedRestaurant = await Restaurant.findByIdAndUpdate(
+      id,
+      updateData,
+      { new: true }
+    );
+    res.status(200).json(updatedRestaurant);
+  } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };

@@ -28,6 +28,12 @@ const restaurantSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Review",
   },
+  coupons: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Coupon",
+    },
+  ], // Reference to Coupon model
 });
 
 const Restaurant = mongoose.model("Restaurant", restaurantSchema);
