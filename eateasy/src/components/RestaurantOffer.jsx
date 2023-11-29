@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
-const RestaurantOffer = ({ restaurant, offer }) => {
+const RestaurantOffer = ({ restaurant, offer, isFeatured }) => {
   const [redeemedCode, setRedeemedCode] = useState(null);
   const [selectedOffer, setSelectedOffer] = useState("");
+  const offerClass = isFeatured ? "bg-orange-300" : "bg-white"; // Example class names
 
   useEffect(() => {
     const randomIndex = Math.floor(Math.random() * offer.length);
@@ -15,12 +16,17 @@ const RestaurantOffer = ({ restaurant, offer }) => {
   };
 
   return (
-    <div className="flex justify-between border-2 rounded-lg p-2 items-center gap-4">
+    <div className={`${offerClass} flex justify-between rounded-lg p-2 items-center gap-4`}>
       <div className="flex-1">
         <img src={restaurant.images[0]} alt="image" className="w-full" />
         <h1 className="font-bold">{restaurant.restaurantName}</h1>
       </div>
-      <p className="font-semibold w-3/5">{selectedOffer}</p>
+      <div className="w-3/5">
+        {isFeatured && (
+          <p className="font-bold underline mb-1">Featured Offer</p>
+        )}
+        <p className="font-semibold">{selectedOffer}</p>
+      </div>
       {!redeemedCode ? (
         <button onClick={handleRedeemClick} className="border-2 bg-slate-800 text-white p-2">
           Redeem

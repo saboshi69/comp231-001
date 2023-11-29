@@ -23,8 +23,8 @@ const OfferPage = () => {
 
   return (
     <div className="lg:w-3/5 w-4/5 mx-auto flex flex-col gap-4 my-8">
-      {data.map((restaurant) => (
-        <RestaurantOffer key={restaurant._id} restaurant={restaurant} offer={offer} />
+      {data.map((restaurant, index) => (
+        <RestaurantOffer key={restaurant._id} restaurant={restaurant} offer={offer} isFeatured={index === 0} />
       ))}
     </div>
   );
