@@ -15,15 +15,15 @@ const AdvanceSearchPage = () => {
     urlParams.set("searchTerm", data?.search?.toString() || "");
     urlParams.set("rate", data?.rate?.toString() || "");
     urlParams.set("review", data?.review?.toString() || "");
+    urlParams.set("menu", data?.menu?.toString() || ""); // Add menu search term
     const url = urlParams.toString();
     setSearchUrl(url);
-    navigate("/search?" + urlParams.toString());
+    navigate("/search?" + url);
   };
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["restaurant", searchUrl],
     queryFn: () => getSearch(searchUrl),
-
     enabled: !!searchUrl,
   });
 
@@ -44,12 +44,12 @@ const AdvanceSearchPage = () => {
           />
         </div>
         <div className="flex items-center gap-4">
-          <label htmlFor="search">Average Review Rate: </label>
+          <label htmlFor="search">Review Rating Equal or Above: </label>
           <input
             type="number"
             className="w-full rounded-md border-2 p-1"
             id="search"
-            placeholder="rate"
+            placeholder="Rate"
             max={5}
             min={0}
             {...register("rate")}
@@ -61,11 +61,20 @@ const AdvanceSearchPage = () => {
             type="text"
             className="w-full rounded-md border-2 p-1"
             id="search"
-            placeholder="review"
+            placeholder="Review"
             {...register("review")}
           />
         </div>
-
+        <div className="flex items-center gap-4">
+          <label htmlFor="menu">Menu: </label>
+          <input
+            type="text"
+            className="w-full rounded-md border-2 p-1"
+            id="menu"
+            placeholder="Menu item"
+            {...register("menu")}
+          />
+        </div>
         <button className="rounded-md border-2 bg-slate-600 p-2 text-white hover:bg-red-950">
           SEARCH
         </button>
@@ -75,7 +84,7 @@ const AdvanceSearchPage = () => {
         <div className=" p-8 text-2xl font-semibold">
           {isLoading && <p>Loading...</p>}
           {isError && <p>{isError}</p>}
-          <div className="my-8 mx-auto gap-4 flex flex-wrap justify-between ">
+          <div className="my-8 mx-auto gap-4 flex flex-wrap justify-center ">
             {data &&
               data.map((restaurant) => (
                 <Card

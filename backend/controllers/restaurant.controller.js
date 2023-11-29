@@ -85,13 +85,19 @@ export const getRestaurantById = async (req, res) => {
 };
 
 export const getSearchedRestaurants = async (req, res) => {
-  const { searchTerm, rate, review } = req.query;
+  const { searchTerm, rate, review, menu } = req.query;
 
   const pipeline = [];
 
   if (searchTerm) {
     pipeline.push({
       $match: { restaurantName: { $regex: searchTerm, $options: "i" } },
+    });
+  }
+
+  if (menu) {
+    pipeline.push({
+      $match: { menu: { $regex: menu, $options: "i" } }, // Search in menu
     });
   }
 
@@ -127,6 +133,7 @@ export const getSearchedRestaurants = async (req, res) => {
       images: { $first: "$images" },
       address: { $first: "$address" },
       description: { $first: "$description" },
+      menu: { $first: "$menu" }, // Include menu in the response
       reviews: { $push: "$reviews" },
       averageRating: { $first: "$averageRating" },
     },
