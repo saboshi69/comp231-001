@@ -3,7 +3,9 @@ import bcrypt from "bcryptjs";
 
 export const updateProfile = async (req, res) => {
   if (req.userId !== req.params.id) {
-    return res.status(401).json({ message: "You can only update your profile" });
+    return res
+      .status(401)
+      .json({ message: "You can only update your profile" });
   }
 
   let { username, email, password } = req.body;
@@ -34,7 +36,31 @@ export const updateProfile = async (req, res) => {
     }
 
     const { password: userPassword, ...user } = updatedProfile._doc;
-    return res.status(200).json({ message: "User updated successfully!", user });
+    return res
+      .status(200)
+      .json({ message: "User updated successfully!", user });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+export const getUserReviews = async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    const userWithReviews = await User.findById(userId).populate({
+      path: "reviews",
+      populate: {
+        path: "restaurant",
+        select: "restaurantName", // Only include the restaurant's name
+      },
+    });
+
+    if (!userWithReviews) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    return res.status(200).json(userWithReviews.reviews);
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
