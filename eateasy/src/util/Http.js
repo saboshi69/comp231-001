@@ -294,3 +294,25 @@ export const getSearch = async (search) => {
     throw err;
   }
 };
+
+export const getUserReviews = async (userId) => {
+  try {
+    const response = await fetch(`/api/user/reviews/${userId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message);
+    }
+
+    const responseData = await response.json();
+    return responseData;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
