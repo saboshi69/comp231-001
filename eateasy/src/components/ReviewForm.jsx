@@ -83,8 +83,8 @@ const ReviewForm = ({ mode, reviewId, desc, rating }) => {
       <button type="submit" className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600">
         Submit
       </button>
-      {isLoading && <span className="block mt-2 text-gray-500">Loading...</span>}
-      {isError && <span className="block mt-2 text-red-500">Error submitting form</span>}
+      {isLoading && <span className="block mt-3 text-gray-500">Loading...</span>}
+      {isError && <span className="block mt-3 text-red-500">Error submitting form</span>}
     </form>
   );
 };
